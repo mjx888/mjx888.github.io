@@ -1,0 +1,204 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Mesh crack tip</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2025-04-05"><meta name="DC.source" content="MeshCrackTip.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Mesh crack tip</h1><!--introduction--><!--/introduction--><p>Download Im2mesh package <a href="https://www.mathworks.com/matlabcentral/fileexchange/71772">https://www.mathworks.com/matlabcentral/fileexchange/71772</a></p><p><b>Im2mesh package require Matlab Mapping toolbox</b></p><p>Before we start, please set folder "Im2mesh_Matlab" as your current folder of MATLAB.</p><pre class="codeinput">clearvars
+</pre><p>Function bounds2mesh use a mesh generator called MESH2D (developed by Darren Engwirda). We can use the following command to add the folder 'mesh2d-master' to the path of MATLAB.</p><pre class="codeinput">addpath(genpath(<span class="string">'mesh2d-master'</span>))
+</pre><p>Create polyshape</p><pre class="codeinput">x = [0 150 150 75 150 150 0];
+y = [0 0 72.5 75 77.5 150 150];
+ps = polyshape(x,y);
+
+plot(ps);
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="MeshCrackTip_01.png" alt=""> <p>Convert to a nested cell array of polygon</p><pre class="codeinput">psCell = {ps};
+bounds = polyshape2bound(psCell);
+
+<span class="comment">% plot boundaries and show all vertices</span>
+plotBounds(bounds,false,<span class="string">'ko-'</span>)
+</pre><img vspace="5" hspace="5" src="MeshCrackTip_02.png" alt=""> <p>Generate mesh</p><pre class="codeinput">hmax = 20;
+grad_limit = 0.25;
+opt = [];
+opt.disp = inf;     <span class="comment">% silence verbosity</span>
+
+[vert,tria,tnum,vert2,tria2] = bounds2mesh( bounds, hmax, grad_limit, opt );
+plotMeshes(vert,tria,tnum);
+</pre><img vspace="5" hspace="5" src="MeshCrackTip_03.png" alt=""> <p>refine mesh locally</p><pre class="codeinput">hmax = 20;
+grad_limit = 0.25;
+opt = [];
+opt.disp = inf;     <span class="comment">% silence verbosity</span>
+
+pnt = [75, 75];     <span class="comment">% 1 point</span>
+hsize = 1;          <span class="comment">% mesh size at point</span>
+opt.pnt_size = [ pnt, hsize ];  <span class="comment">% p-by-3 array</span>
+
+[ vert,tria,tnum,vert2,tria2 ] = bounds2mesh( bounds, hmax, grad_limit, opt );
+plotMeshes(vert,tria,tnum);
+</pre><img vspace="5" hspace="5" src="MeshCrackTip_04.png" alt=""> <p>Please refer to the following link for how to refine mesh locally <a href="https://mjx888.github.io/im2mesh_demo_html/demo17.html">https://mjx888.github.io/im2mesh_demo_html/demo17.html</a></p><p>Create matlab pde model object</p><pre class="codeinput"><span class="comment">% linear model</span>
+model_linear = createpde();
+geometryFromMesh( model_linear, vert', tria', tnum' );
+
+<span class="comment">% qudratic model</span>
+model_quad = createpde();
+geometryFromMesh( model_quad, vert2', tria2', tnum' );
+</pre><p>show geometry</p><pre class="codeinput">pdegplot(model_quad, <span class="string">'EdgeLabels'</span>,<span class="string">'on'</span>,<span class="string">'VertexLabels'</span>,<span class="string">'on'</span>, <span class="string">'FaceLabels'</span>,<span class="string">'on'</span> )
+</pre><img vspace="5" hspace="5" src="MeshCrackTip_05.png" alt=""> <p>Show mesh</p><pre class="codeinput">pdemesh( model_quad )
+</pre><img vspace="5" hspace="5" src="MeshCrackTip_06.png" alt=""> <p>end</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Mesh crack tip
+
+%% 
+% Download Im2mesh package
+% https://www.mathworks.com/matlabcentral/fileexchange/71772
+
+%%
+% *Im2mesh package require Matlab Mapping toolbox* 
+
+%%
+% Before we start, please set folder "Im2mesh_Matlab" as your current folder 
+% of MATLAB.
+
+clearvars
+%% 
+% Function bounds2mesh use a mesh generator called MESH2D (developed by Darren 
+% Engwirda). We can use the following command to add the folder 'mesh2d-master' 
+% to the path of MATLAB. 
+
+addpath(genpath('mesh2d-master'))
+
+%%
+% Create polyshape
+
+x = [0 150 150 75 150 150 0];
+y = [0 0 72.5 75 77.5 150 150];
+ps = polyshape(x,y);
+
+plot(ps); 
+axis equal
+
+%%
+% Convert to a nested cell array of polygon
+
+psCell = {ps}; 
+bounds = polyshape2bound(psCell);
+
+% plot boundaries and show all vertices
+plotBounds(bounds,false,'ko-')
+
+%% 
+% Generate mesh
+
+hmax = 20; 
+grad_limit = 0.25;
+opt = [];
+opt.disp = inf;     % silence verbosity
+
+[vert,tria,tnum,vert2,tria2] = bounds2mesh( bounds, hmax, grad_limit, opt );
+plotMeshes(vert,tria,tnum);
+
+%%
+% refine mesh locally
+
+hmax = 20; 
+grad_limit = 0.25;
+opt = [];
+opt.disp = inf;     % silence verbosity
+
+pnt = [75, 75];     % 1 point
+hsize = 1;          % mesh size at point
+opt.pnt_size = [ pnt, hsize ];  % p-by-3 array
+
+[ vert,tria,tnum,vert2,tria2 ] = bounds2mesh( bounds, hmax, grad_limit, opt );
+plotMeshes(vert,tria,tnum);
+
+%%
+% Please refer to the following link for how to refine mesh locally
+% https://mjx888.github.io/im2mesh_demo_html/demo17.html
+
+%%
+% Create matlab pde model object
+
+% linear model
+model_linear = createpde();
+geometryFromMesh( model_linear, vert', tria', tnum' );
+
+% qudratic model
+model_quad = createpde();
+geometryFromMesh( model_quad, vert2', tria2', tnum' );
+
+%%
+% show geometry
+pdegplot(model_quad, 'EdgeLabels','on','VertexLabels','on', 'FaceLabels','on' )
+
+%% 
+% Show mesh
+pdemesh( model_quad )
+
+%%
+% end
+##### SOURCE END #####
+--></body></html>
