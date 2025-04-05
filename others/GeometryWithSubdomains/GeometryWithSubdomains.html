@@ -81,7 +81,7 @@ figure
 hold <span class="string">on</span>; axis <span class="string">equal</span>
 plot(psSq1);
 plot(psSq2);
-axis <span class="string">equal</span>
+hold <span class="string">off</span>
 </pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_01.png" alt=""> <p>Remove overlap</p><pre class="codeinput">psSq1 = subtract(psSq1, psSq2);
 
 figure
@@ -97,14 +97,14 @@ bounds = addIntersectPnts( bounds, tol_intersect );
 
 <span class="comment">% plot boundaries and show all vertices</span>
 plotBounds(bounds,false,<span class="string">'ko-'</span>)
-</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_03.png" alt=""> <img vspace="5" hspace="5" src="GeometryWithSubdomains_04.png" alt=""> <p>Generate mesh</p><pre class="codeinput">hmax = 2;
+</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_03.png" alt=""> <p>Generate mesh</p><pre class="codeinput">hmax = 2;
 grad_limit = 0.25;
 opt = [];
 opt.disp = inf;     <span class="comment">% silence verbosity</span>
 
 [vert,tria,tnum,vert2,tria2] = bounds2mesh( bounds, hmax, grad_limit, opt );
 plotMeshes(vert,tria,tnum);
-</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_05.png" alt=""> <p>Create matlab pde model object</p><pre class="codeinput"><span class="comment">% linear model</span>
+</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_04.png" alt=""> <p>Create matlab pde model object</p><pre class="codeinput"><span class="comment">% linear model</span>
 model_linear = createpde();
 geometryFromMesh( model_linear, vert', tria', tnum' );
 
@@ -112,8 +112,8 @@ geometryFromMesh( model_linear, vert', tria', tnum' );
 model_quad = createpde();
 geometryFromMesh( model_quad, vert2', tria2', tnum' );
 </pre><p>show geometry</p><pre class="codeinput">pdegplot(model_quad, <span class="string">'EdgeLabels'</span>,<span class="string">'on'</span>,<span class="string">'VertexLabels'</span>,<span class="string">'on'</span>, <span class="string">'FaceLabels'</span>,<span class="string">'on'</span> )
-</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_06.png" alt=""> <p>Show mesh</p><pre class="codeinput">pdemesh( model_quad )
-</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_07.png" alt=""> <p>end</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_05.png" alt=""> <p>Show mesh</p><pre class="codeinput">pdemesh( model_quad )
+</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_06.png" alt=""> <p>end</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% 2D Geometry with subdomains
 
@@ -150,7 +150,7 @@ figure
 hold on; axis equal
 plot(psSq1); 
 plot(psSq2); 
-axis equal
+hold off
 
 %% 
 % Remove overlap
