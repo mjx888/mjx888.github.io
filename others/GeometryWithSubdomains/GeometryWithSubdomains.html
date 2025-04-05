@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>GeometryWithSubdomains</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2025-04-05"><meta name="DC.source" content="GeometryWithSubdomains.m"><style type="text/css">
+      --><title>2D Geometry with subdomains</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2025-04-05"><meta name="DC.source" content="GeometryWithSubdomains.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,8 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><p>download Im2mesh package <a href="https://www.mathworks.com/matlabcentral/fileexchange/71772">https://www.mathworks.com/matlabcentral/fileexchange/71772</a></p><pre class="codeinput"><span class="comment">% Need Matlab Mapping toolbox</span>
-</pre><p>Before we start, please set folder "Im2mesh_Matlab" as your current folder of MATLAB.</p><pre class="codeinput">clearvars
+  </style></head><body><div class="content"><h1>2D Geometry with subdomains</h1><!--introduction--><!--/introduction--><p>Download Im2mesh package <a href="https://www.mathworks.com/matlabcentral/fileexchange/71772">https://www.mathworks.com/matlabcentral/fileexchange/71772</a></p><p><b>Im2mesh package require Matlab Mapping toolbox</b></p><p>Before we start, please set folder "Im2mesh_Matlab" as your current folder of MATLAB.</p><pre class="codeinput">clearvars
 </pre><p>Function bounds2mesh use a mesh generator called MESH2D (developed by Darren Engwirda). We can use the following command to add the folder 'mesh2d-master' to the path of MATLAB.</p><pre class="codeinput">addpath(genpath(<span class="string">'mesh2d-master'</span>))
 </pre><p>Create polyshape</p><pre class="codeinput"><span class="comment">% square1</span>
 vertex1 = 12*[ 0 0; 1 0; 1 1; 0 1 ];
@@ -98,14 +97,14 @@ bounds = addIntersectPnts( bounds, tol_intersect );
 
 <span class="comment">% plot boundaries and show all vertices</span>
 plotBounds(bounds,false,<span class="string">'ko-'</span>)
-</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_03.png" alt=""> <p>Generate mesh</p><pre class="codeinput">hmax = 2;
+</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_03.png" alt=""> <img vspace="5" hspace="5" src="GeometryWithSubdomains_04.png" alt=""> <p>Generate mesh</p><pre class="codeinput">hmax = 2;
 grad_limit = 0.25;
 opt = [];
 opt.disp = inf;     <span class="comment">% silence verbosity</span>
 
 [vert,tria,tnum,vert2,tria2] = bounds2mesh( bounds, hmax, grad_limit, opt );
 plotMeshes(vert,tria,tnum);
-</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_04.png" alt=""> <p>Create matlab pde model object</p><pre class="codeinput"><span class="comment">% linear model</span>
+</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_05.png" alt=""> <p>Create matlab pde model object</p><pre class="codeinput"><span class="comment">% linear model</span>
 model_linear = createpde();
 geometryFromMesh( model_linear, vert', tria', tnum' );
 
@@ -113,14 +112,17 @@ geometryFromMesh( model_linear, vert', tria', tnum' );
 model_quad = createpde();
 geometryFromMesh( model_quad, vert2', tria2', tnum' );
 </pre><p>show geometry</p><pre class="codeinput">pdegplot(model_quad, <span class="string">'EdgeLabels'</span>,<span class="string">'on'</span>,<span class="string">'VertexLabels'</span>,<span class="string">'on'</span>, <span class="string">'FaceLabels'</span>,<span class="string">'on'</span> )
-</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_05.png" alt=""> <p>Show mesh</p><pre class="codeinput">pdemesh( model_quad )
-</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_06.png" alt=""> <p>end</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_06.png" alt=""> <p>Show mesh</p><pre class="codeinput">pdemesh( model_quad )
+</pre><img vspace="5" hspace="5" src="GeometryWithSubdomains_07.png" alt=""> <p>end</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
+%% 2D Geometry with subdomains
+
 %% 
-% download Im2mesh package
+% Download Im2mesh package
 % https://www.mathworks.com/matlabcentral/fileexchange/71772
 
-% Need Matlab Mapping toolbox
+%%
+% *Im2mesh package require Matlab Mapping toolbox* 
 
 %%
 % Before we start, please set folder "Im2mesh_Matlab" as your current folder 
