@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Meshing a 2D contour plot</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2025-04-06"><meta name="DC.source" content="Coutour2mesh.m"><style type="text/css">
+      --><title>Meshing a 2D contour plot</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2025-04-12"><meta name="DC.source" content="Coutour2mesh.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,10 +67,10 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Meshing a 2D contour plot</h1><!--introduction--><!--/introduction--><p>Download Im2mesh package <a href="https://www.mathworks.com/matlabcentral/fileexchange/71772">https://www.mathworks.com/matlabcentral/fileexchange/71772</a></p><p><b>Im2mesh package require Matlab Mapping toolbox</b></p><p>Before we start, please set folder "Im2mesh_Matlab" as your current folder of MATLAB.</p><pre class="codeinput">clearvars
-</pre><p>Function bounds2mesh use a mesh generator called MESH2D (developed by Darren Engwirda). We can use the following command to add the folder 'mesh2d-master' to the path of MATLAB.</p><pre class="codeinput">addpath(genpath(<span class="string">'mesh2d-master'</span>))
-</pre><p>Define Z, interested level, and outer boundary</p><pre class="codeinput">Z = peaks;      <span class="comment">% Z is a matrix containing the height values of the surface</span>
-                <span class="comment">% with respect to the x-y plane.</span>
+  </style></head><body><div class="content"><h1>Meshing a 2D contour plot</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#6">Case 1</a></li><li><a href="#22">Case 2</a></li></ul></div><p>Download Im2mesh package <a href="https://www.mathworks.com/matlabcentral/fileexchange/71772">https://www.mathworks.com/matlabcentral/fileexchange/71772</a></p><p><b>Im2mesh package require Matlab Mapping toolbox</b></p><p>Before we start, please set folder "Im2mesh_Matlab" as your current folder of MATLAB.</p><p>Function bounds2mesh use a mesh generator called MESH2D (developed by Darren Engwirda). We can use the following command to add the folder 'mesh2d-master' to the path of MATLAB.</p><pre class="codeinput">addpath(genpath(<span class="string">'mesh2d-master'</span>))
+</pre><pre class="codeinput">clear <span class="string">all</span>
+</pre><h2 id="6">Case 1</h2><p>Define Z, interested level, and outer boundary</p><pre class="codeinput">Z = peaks;      <span class="comment">% Z is a 49-by-49 matrix containing the height values of</span>
+                <span class="comment">% the surface with respect to the x-y plane.</span>
 
 level = 1.5;    <span class="comment">% interested level</span>
 
@@ -160,7 +160,99 @@ model_quad = createpde();
 geometryFromMesh( model_quad, vert2', tria2', tnum' );
 </pre><p>Show geometry</p><pre class="codeinput">pdegplot(model_quad, <span class="string">'EdgeLabels'</span>,<span class="string">'on'</span>,<span class="string">'VertexLabels'</span>,<span class="string">'on'</span>, <span class="string">'FaceLabels'</span>,<span class="string">'on'</span> )
 </pre><img vspace="5" hspace="5" src="Coutour2mesh_10.png" alt=""> <p>Show mesh</p><pre class="codeinput">pdemesh( model_quad )
-</pre><img vspace="5" hspace="5" src="Coutour2mesh_11.png" alt=""> <p>end</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_11.png" alt=""> <pre class="codeinput">clear <span class="string">all</span>
+</pre><h2 id="22">Case 2</h2><p>Define Z, interested level, and outer boundary</p><pre class="codeinput">n = -1:0.1:1;
+Z = peaks(n);   <span class="comment">% Z is a 21-by-21 matrix containing the height values of</span>
+                <span class="comment">% the surface with respect to the x-y plane.</span>
+
+level = 1.5;    <span class="comment">% interested level</span>
+
+<span class="comment">% outer boundary</span>
+xmin = 1;
+ymin = 1;
+xmax = 21;
+ymax = 21;
+</pre><p>Plot surface</p><pre class="codeinput">surf(Z)
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_12.png" alt=""> <p>Plot contour</p><pre class="codeinput">contour(Z, [level,level]);
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_13.png" alt=""> <p>Store vertices in countour</p><pre class="codeinput"><span class="comment">% add (-inf) padding to Z</span>
+Z2 = padarray(Z,[1 1],-inf,<span class="string">'both'</span>);
+
+C = contourc(Z2, [level,level]);
+
+contourCell = {};   <span class="comment">% a cell array for vertices in countours</span>
+k = 1;              <span class="comment">% current column in C</span>
+
+<span class="keyword">while</span> k &lt; size(C,2)
+    nv = C(2,k);           <span class="comment">% number of vertices</span>
+    idx  = k+1 : k+nv;     <span class="comment">% columns that hold the vertices</span>
+    xy = C(1:2,idx)';      <span class="comment">% nv-by-2 array</span>
+    contourCell{end+1} = xy -1 ;    <span class="comment">% -1 is used to removed padding</span>
+
+    k = k + nv + 1;       <span class="comment">% jump to next header</span>
+<span class="keyword">end</span>
+</pre><p>Plot contourCell</p><pre class="codeinput">figure
+hold <span class="string">on</span>; axis <span class="string">equal</span>
+<span class="keyword">for</span> i = 1: length(contourCell)
+    plot( contourCell{i}(:,1), contourCell{i}(:,2) )
+<span class="keyword">end</span>
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_14.png" alt=""> <p>Convert contourCell to polyshape object</p><pre class="codeinput">x_temp = [];
+y_temp = [];
+
+<span class="keyword">for</span> i = 1: length(contourCell)
+    x_temp = [ x_temp; NaN; contourCell{i}(:,1) ];
+    y_temp = [ y_temp; NaN; contourCell{i}(:,2) ];
+<span class="keyword">end</span>
+
+psIn = polyshape( x_temp, y_temp  );
+</pre><pre class="codeoutput">Warning: Polyshape has duplicate vertices, intersections, or other
+inconsistencies that may produce inaccurate or unexpected results. Input data
+has been modified to create a well-defined polyshape. 
+</pre><p>Plot polyshape object</p><pre class="codeinput">plot(psIn);
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_15.png" alt=""> <p>Boolean operation</p><pre class="codeinput">vertex = [xmin ymin; xmax ymin; xmax ymax; xmin ymax; xmin ymin];
+psOB = polyshape(vertex);   <span class="comment">% polyshape for outer boundary</span>
+
+psOB = subtract(psOB, psIn);
+
+figure
+hold <span class="string">on</span>; axis <span class="string">equal</span>
+plot(psOB);
+plot(psIn);
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_16.png" alt=""> <p>Convert to a nested cell array of polygons</p><pre class="codeinput">psCell = {psOB; psIn};              <span class="comment">% a cell array of polyshape</span>
+bounds = polyshape2bound(psCell);   <span class="comment">% a nested cell array of polygons</span>
+tol_intersect = 1e-6;
+bounds = addIntersectPnts( bounds, tol_intersect );
+
+<span class="comment">% plot polygons and show all vertices</span>
+plotBounds(bounds,false,<span class="string">'ko-'</span>)
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_17.png" alt=""> <p>Reduce the number of vertices</p><pre class="codeinput">boundsNew = getCtrlPnts( bounds, false );
+
+tolerance = 0.1;   <span class="comment">% For polyline simplification</span>
+                   <span class="comment">% This value will affect the final mesh size.</span>
+                   <span class="comment">% Increase tolerance, the min mesh size will increase.</span>
+boundsNew = simplifyBounds( boundsNew, tolerance );
+
+<span class="comment">% show all vertices</span>
+plotBounds(boundsNew,false,<span class="string">'ko-'</span>)
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_18.png" alt=""> <p>Generate mesh</p><pre class="codeinput">hmax = 500;
+grad_limit = 0.25;
+opt = [];
+opt.disp = inf;     <span class="comment">% silence verbosity</span>
+
+[vert,tria,tnum,vert2,tria2] = bounds2mesh( boundsNew, hmax, grad_limit, opt );
+plotMeshes(vert,tria,tnum);
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_19.png" alt=""> <p>Create matlab pde model object</p><pre class="codeinput"><span class="comment">% linear model</span>
+model_linear = createpde();
+geometryFromMesh( model_linear, vert', tria', tnum' );
+
+<span class="comment">% qudratic model</span>
+model_quad = createpde();
+geometryFromMesh( model_quad, vert2', tria2', tnum' );
+</pre><p>Show geometry</p><pre class="codeinput">pdegplot(model_quad, <span class="string">'EdgeLabels'</span>,<span class="string">'on'</span>,<span class="string">'VertexLabels'</span>,<span class="string">'on'</span>, <span class="string">'FaceLabels'</span>,<span class="string">'on'</span> )
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_20.png" alt=""> <p>Show mesh</p><pre class="codeinput">pdemesh( model_quad )
+</pre><img vspace="5" hspace="5" src="Coutour2mesh_21.png" alt=""> <p>end</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Meshing a 2D contour plot
 
@@ -174,7 +266,6 @@ geometryFromMesh( model_quad, vert2', tria2', tnum' );
 %%
 % Before we start, please set folder "Im2mesh_Matlab" as your current folder 
 % of MATLAB.
-clearvars
 
 %% 
 % Function bounds2mesh use a mesh generator called MESH2D (developed by Darren 
@@ -184,10 +275,13 @@ clearvars
 addpath(genpath('mesh2d-master'))
 
 %%
+clear all
+
+%% Case 1
 % Define Z, interested level, and outer boundary
 
-Z = peaks;      % Z is a matrix containing the height values of the surface 
-                % with respect to the x-y plane.
+Z = peaks;      % Z is a 49-by-49 matrix containing the height values of 
+                % the surface with respect to the x-y plane.
 
 level = 1.5;    % interested level
 
@@ -311,6 +405,151 @@ opt = [];
 opt.disp = inf;     % silence verbosity
 
 [vert,tria,tnum,vert2,tria2] = bounds2mesh( boundsNew(1), hmax, grad_limit, opt );
+plotMeshes(vert,tria,tnum);
+
+%% 
+% Create matlab pde model object
+
+% linear model
+model_linear = createpde();
+geometryFromMesh( model_linear, vert', tria', tnum' );
+
+% qudratic model
+model_quad = createpde();
+geometryFromMesh( model_quad, vert2', tria2', tnum' );
+
+%%
+% Show geometry
+pdegplot(model_quad, 'EdgeLabels','on','VertexLabels','on', 'FaceLabels','on' )
+
+%% 
+% Show mesh
+pdemesh( model_quad )
+
+%%
+clear all
+
+%% Case 2
+% Define Z, interested level, and outer boundary
+
+n = -1:0.1:1;
+Z = peaks(n);   % Z is a 21-by-21 matrix containing the height values of 
+                % the surface with respect to the x-y plane.
+
+level = 1.5;    % interested level
+
+% outer boundary
+xmin = 1;
+ymin = 1;
+xmax = 21;
+ymax = 21;
+
+%%
+% Plot surface 
+
+surf(Z)
+
+%%
+% Plot contour
+
+contour(Z, [level,level]);
+
+%%
+% Store vertices in countour
+
+% add (-inf) padding to Z
+Z2 = padarray(Z,[1 1],-inf,'both');
+
+C = contourc(Z2, [level,level]);
+
+contourCell = {};   % a cell array for vertices in countours
+k = 1;              % current column in C
+
+while k < size(C,2)
+    nv = C(2,k);           % number of vertices
+    idx  = k+1 : k+nv;     % columns that hold the vertices
+    xy = C(1:2,idx)';      % nv-by-2 array
+    contourCell{end+1} = xy -1 ;    % -1 is used to removed padding
+
+    k = k + nv + 1;       % jump to next header
+end
+
+%%
+% Plot contourCell
+
+figure
+hold on; axis equal
+for i = 1: length(contourCell)
+    plot( contourCell{i}(:,1), contourCell{i}(:,2) )
+end
+hold off
+
+%%
+% Convert contourCell to polyshape object
+
+x_temp = [];
+y_temp = [];
+
+for i = 1: length(contourCell)
+    x_temp = [ x_temp; NaN; contourCell{i}(:,1) ];
+    y_temp = [ y_temp; NaN; contourCell{i}(:,2) ];
+end
+
+psIn = polyshape( x_temp, y_temp  );
+
+%%
+% Plot polyshape object
+
+plot(psIn); 
+axis equal
+
+%%
+% Boolean operation
+
+vertex = [xmin ymin; xmax ymin; xmax ymax; xmin ymax; xmin ymin];
+psOB = polyshape(vertex);   % polyshape for outer boundary
+
+psOB = subtract(psOB, psIn);
+
+figure
+hold on; axis equal
+plot(psOB);
+plot(psIn);
+hold off
+
+%%
+% Convert to a nested cell array of polygons
+
+psCell = {psOB; psIn};              % a cell array of polyshape
+bounds = polyshape2bound(psCell);   % a nested cell array of polygons
+tol_intersect = 1e-6;
+bounds = addIntersectPnts( bounds, tol_intersect );
+
+% plot polygons and show all vertices
+plotBounds(bounds,false,'ko-')
+
+%%
+% Reduce the number of vertices
+
+boundsNew = getCtrlPnts( bounds, false );
+
+tolerance = 0.1;   % For polyline simplification
+                   % This value will affect the final mesh size.
+                   % Increase tolerance, the min mesh size will increase.
+boundsNew = simplifyBounds( boundsNew, tolerance );
+
+% show all vertices
+plotBounds(boundsNew,false,'ko-')
+
+%% 
+% Generate mesh
+
+hmax = 500; 
+grad_limit = 0.25;
+opt = [];
+opt.disp = inf;     % silence verbosity
+
+[vert,tria,tnum,vert2,tria2] = bounds2mesh( boundsNew, hmax, grad_limit, opt );
 plotMeshes(vert,tria,tnum);
 
 %% 
