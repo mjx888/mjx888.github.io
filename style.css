@@ -192,3 +192,33 @@ footer {
     text-align: center;
     padding: 20px 0;
 }
+
+/* --- Mobile Layout Fixes --- */
+@media (max-width: 768px) {
+    /* 1. Stack the navigation menu neatly */
+    .nav-container {
+        flex-direction: column;
+        padding: 15px 10px;
+        gap: 10px;
+    }
+    
+    /* 2. Center the links */
+    .nav-links {
+        justify-content: center;
+        padding-left: 0;
+    }
+    
+    .nav-links li {
+        margin: 0 12px; /* Adds even spacing between links on mobile */
+    }
+
+    /* 3. Push the Home/About section down to clear the taller mobile menu */
+    #home {
+        padding-top: 170px; 
+    }
+
+    /* 4. Ensure clicking Research or Publications doesn't hide their titles */
+    .section {
+        scroll-margin-top: 140px; 
+    }
+}
