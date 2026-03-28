@@ -1,0 +1,194 @@
+/* Base Styles */
+:root {
+    --primary-color: #248D6C; /* #2c3e50; */
+    --secondary-color: #3498db;
+    --bg-color: #ffffff;
+    --bg-light: #f8f9fa;
+    --text-color: #333333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+nav {
+    background-color: var(--primary-color);
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Sections */
+.section {
+    padding: 50px 0 50px; /* Top padding accounts for fixed navbar */
+	scroll-margin-top: 60px; /* Prevents the fixed navbar from covering the title */
+}
+
+.bg-light {
+    background-color: var(--bg-light);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    display: inline-block;
+}
+
+/* Home / Bio */
+#home {
+    padding-top: 100px; /* Gives extra space specifically to the top */
+}
+
+.home-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.bio p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.contact-info a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+/* Research Grid */
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.research-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.research-card h3 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+/* Publications */
+.pub-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* This creates the side-by-side layout */
+.pub-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centers the image vertically next to the text */
+    gap: 30px; /* Space between text and image */
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Tells the text to take up all remaining space so the image gets pushed right */
+.pub-text {
+    flex: 1;
+}
+
+/* Styles the illustration figure */
+.pub-figure {
+    width: 400px; /* Adjust this width based on how large you want your figures */
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Adds a subtle shadow to make the image pop */
+}
+
+/* Adjust layout for mobile devices so the image stacks below text on small screens */
+@media (max-width: 768px) {
+    .pub-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .pub-figure {
+        margin-top: 15px;
+        width: 100%; /* Image takes full width on mobile */
+        max-width: 300px;
+    }
+}
+
+.btn-link {
+    display: inline-block;
+    margin-top: 5px;
+    margin-right: 10px;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
