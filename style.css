@@ -214,7 +214,7 @@ footer {
 
     /* 3. Push the Home/About section down to clear the taller mobile menu */
     #home {
-        padding-top: 190px; 
+        padding-top: 180px; 
     }
 
     /* 4. Ensure clicking Research or Publications doesn't hide their titles */
