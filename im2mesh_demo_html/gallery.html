@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 5px; /* Reduced slightly to bring subtitle closer */
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.5em;
+            margin-top: 0.5;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            text-transform: capitalize; /* Automatically capitalizes the first letter */
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gallery - 3D voxel image to tetrahedral mesh</h1>
+    <p class="subtitle">via Im2mesh demo20. Jiexian Ma</p>
+
+    <h2>Hollow stanford bunny</h2>
+    <div class="gallery">
+        <img src="3d_b1.jpg" alt="Image 1">
+        <img src="3d_b2.png" alt="Image 2">
+        <img src="3d_b3.png" alt="Image 3">
+    </div>
+
+    <h2>Sandpack</h2>
+    <div class="gallery">
+        <img src="3d_s1.jpg" alt="Image 4">
+        <img src="3d_s2.png" alt="Image 5">
+        <img src="3d_s3.png" alt="Image 6">
+        <img src="3d_s4.png" alt="Image 7">
+    </div>
+
+    <h2>Brain</h2>
+    <div class="gallery">
+        <img src="3d_br1.jpg" alt="Image 8">
+        <img src="3d_br2.png" alt="Image 9">
+        <img src="3d_br3.png" alt="Image 10">
+    </div>
+
+</body>
+</html>
