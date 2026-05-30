@@ -71,7 +71,7 @@ nav {
 /* Sections */
 .section {
     padding: 50px 0 50px; /* Top padding accounts for fixed navbar */
-	scroll-margin-top: 60px; /* Prevents the fixed navbar from covering the title */
+    scroll-margin-top: 60px; /* Prevents the fixed navbar from covering the title */
 }
 
 .bg-light {
@@ -161,6 +161,13 @@ h2 {
     height: auto;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Adds a subtle shadow to make the image pop */
+    cursor: pointer; /* Changes the mouse to a hand pointer */
+    transition: transform 0.2s ease; /* Smooth transition for the hover effect */
+}
+
+/* Adds a slight zoom when the user hovers over the image */
+.pub-figure:hover {
+    transform: scale(1.02);
 }
 
 /* Adjust layout for mobile devices so the image stacks below text on small screens */

@@ -202,5 +202,21 @@
         </div>
     </footer>
 
+
+<script>
+        // Select all images with the class 'pub-figure'
+        const pubImages = document.querySelectorAll('.pub-figure');
+        
+        pubImages.forEach(img => {
+            // Add a click event listener to each image
+            img.addEventListener('click', function() {
+                // Open the image's source URL in a new tab ('_blank')
+                window.open(this.src, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
+
 </body>
 </html>
