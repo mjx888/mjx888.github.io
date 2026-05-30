@@ -7,26 +7,30 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            /* Crisp, modern light background */
+            background-color: #f8fafc; 
             margin: 0;
             padding: 0px;
             text-align: center;
         }
         h1 {
-            color: #333;
-            margin-bottom: 5px; /* Reduced slightly to bring subtitle closer */
+            /* Deep, dark slate for high contrast */
+            color: #0f172a; 
+            margin-bottom: 5px; 
         }
         .subtitle {
-            color: #666;
+            /* Medium gray for the subtitle */
+            color: #64748b; 
             font-size: 1.5em;
-            margin-top: 0.5;
+            margin-top: 0.5em; 
             margin-bottom: 30px;
         }
         h2 {
-            color: #555;
+            /* Dark gray for section headers */
+            color: #334155; 
             margin-top: 40px;
             margin-bottom: 15px;
-            text-transform: capitalize; /* Automatically capitalizes the first letter */
+            text-transform: capitalize; 
         }
         .gallery {
             display: grid;
@@ -40,18 +44,22 @@
             height: 300px;
             object-fit: contain;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            /* Softer, lighter shadow for a clean look */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08); 
             transition: transform 0.2s;
+            cursor: pointer; 
         }
         .gallery img:hover {
             transform: scale(1.03);
+            /* Slightly deeper shadow on hover for a tactile feel */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.12); 
         }
     </style>
 </head>
 <body>
 
     <h1>Gallery - 3D voxel image to tetrahedral mesh</h1>
-    <p class="subtitle">via Im2mesh demo20  by Jiexian Ma</p>
+    <p class="subtitle">via Im2mesh demo20 by Jiexian Ma</p>
 
     <h2>Hollow stanford bunny</h2>
     <div class="gallery">
@@ -74,6 +82,16 @@
         <img src="3d_br2.png" alt="Image 9">
         <img src="3d_br3.png" alt="Image 10">
     </div>
+
+    <script>
+        const images = document.querySelectorAll('.gallery img');
+
+        images.forEach(img => {
+            img.addEventListener('click', function() {
+                window.open(this.src, '_blank');
+            });
+        });
+    </script>
 
 </body>
 </html>
