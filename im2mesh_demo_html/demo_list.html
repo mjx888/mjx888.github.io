@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB 2021b"><title>demo of Im2mesh package</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(213, 80, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
+.S1 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S2 { margin: 10px 0px 20px; padding-left: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 14px;  }
+.S3 { margin-left: 56px; line-height: 21px; min-height: 0px; text-align: left; white-space: pre-wrap;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span style=' font-weight: bold;'>demo of Im2mesh package</span></h1><div  class = 'S1'><a href = "https://github.com/mjx888/im2mesh"><span>Github</span></a></div><ul  class = 'S2'><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo01.html"><span>demo01</span></a><span> - Demonstrate function </span><span>im2mesh</span><span>, which use </span><span>MESH2D</span><span> as mesh generator.</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo02.html"><span>demo02</span></a><span> - Demonstrate function </span><span>im2meshBuiltIn</span><span>, which use MATLAB built-in function </span><span>generateMesh</span><span> as mesh generator.</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo03.html"><span>demo03</span></a><span> - Export: save mesh as </span><span>inp</span><span>, </span><span>bdf</span><span>, </span><span>msh</span><span> or, </span><span>stl</span><span> file; save image boundary as </span><span>dxf</span><span> file, Gmsh </span><span>geo</span><span> file, or PSLG data.</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo04.html"><span>demo04</span></a><span> - What is inside function </span><span>im2mesh</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo05.html"><span>demo05</span></a><span> - Thresholds in polyline smoothing</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo06.html"><span>demo06</span></a><span> - Parameter </span><span>hmax</span><span> and </span><span>grad_limit</span><span> in mesh generation</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo07.html"><span>demo07</span></a><span> - Function </span><span>plotMeshes</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo08.html"><span>demo08</span></a><span> - Select phases for meshing</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo09.html"><span>demo09</span></a><span> - Find node sets at the interface and boundary</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo10.html"><span>demo10</span></a><span> - Function </span><span>pixelMesh</span><span> (pixel-based quadrilateral mesh)</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo11.html"><span>demo11</span></a><span> - Use </span><span>Gmsh</span><span> as mesh generator</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo12.html"><span>demo12</span></a><span> - Use polyshape to define geometry and generate mesh via MESH2D</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo12_gmsh.html"><span>demo12_gmsh</span></a><span> - Use polyshape to define geometry and generate mesh via Gmsh</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo13.html"><span>demo13</span></a><span> - 2D mesh for periodic boundary conditions</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo14.html"><span>demo14</span></a><span> - Edit polygonal boundaries before meshing</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo15.html"><span>demo15</span></a><span> - Generate mesh based on 2D contours</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo16.html"><span>demo16</span></a><span> - Add mesh seeds/nodes</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo17.html"><span>demo17</span></a><span> - Refine mesh</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo18.html"><span>demo18</span></a><span> - 2D image to tetrahedral mesh</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo19.html"><span>demo19</span></a><span> - Function </span><span>voxelMesh</span><span> (voxel-based hexahedral mesh)</span></li><li  class = 'S3'><a href = "https://mjx888.github.io/im2mesh_demo_html/demo20.html"><span>demo20</span></a><span> - 3D voxel image to tetrahedral mesh (via fTetWild)</span></li></ul>
+<br>
+<!-- 
+##### SOURCE BEGIN #####
+%% *demo of Im2mesh package*
+% <https://github.com/mjx888/im2mesh Github>
+%% 
+% * <https://mjx888.github.io/im2mesh_demo_html/demo01.html demo01> - Demonstrate 
+% function im2mesh, which use MESH2D as mesh generator.
+% * <https://mjx888.github.io/im2mesh_demo_html/demo02.html demo02> - Demonstrate 
+% function im2meshBuiltIn, which use MATLAB built-in function generateMesh as 
+% mesh generator.
+% * <https://mjx888.github.io/im2mesh_demo_html/demo03.html demo03> - Export: 
+% save mesh as inp, bdf, msh or, stl file; save image boundary as dxf file, Gmsh 
+% geo file, or PSLG data.
+% * <https://mjx888.github.io/im2mesh_demo_html/demo04.html demo04> - What is 
+% inside function im2mesh
+% * <https://mjx888.github.io/im2mesh_demo_html/demo05.html demo05> - Thresholds 
+% in polyline smoothing
+% * <https://mjx888.github.io/im2mesh_demo_html/demo06.html demo06> - Parameter 
+% hmax and grad_limit in mesh generation
+% * <https://mjx888.github.io/im2mesh_demo_html/demo07.html demo07> - Function 
+% plotMeshes
+% * <https://mjx888.github.io/im2mesh_demo_html/demo08.html demo08> - Select 
+% phases for meshing
+% * <https://mjx888.github.io/im2mesh_demo_html/demo09.html demo09> - Find node 
+% sets at the interface and boundary
+% * <https://mjx888.github.io/im2mesh_demo_html/demo10.html demo10> - Function 
+% pixelMesh (pixel-based quadrilateral mesh)
+% * <https://mjx888.github.io/im2mesh_demo_html/demo11.html demo11> - Use Gmsh 
+% as mesh generator
+% * <https://mjx888.github.io/im2mesh_demo_html/demo12.html demo12> - Use polyshape 
+% to define geometry and generate mesh via MESH2D
+% * <https://mjx888.github.io/im2mesh_demo_html/demo12_gmsh.html demo12_gmsh> 
+% - Use polyshape to define geometry and generate mesh via Gmsh
+% * <https://mjx888.github.io/im2mesh_demo_html/demo13.html demo13> - 2D mesh 
+% for periodic boundary conditions
+% * <https://mjx888.github.io/im2mesh_demo_html/demo14.html demo14> - Edit polygonal 
+% boundaries before meshing
+% * <https://mjx888.github.io/im2mesh_demo_html/demo15.html demo15> - Generate 
+% mesh based on 2D contours
+% * <https://mjx888.github.io/im2mesh_demo_html/demo16.html demo16> - Add mesh 
+% seeds/nodes
+% * <https://mjx888.github.io/im2mesh_demo_html/demo17.html demo17> - Refine 
+% mesh
+% * <https://mjx888.github.io/im2mesh_demo_html/demo18.html demo18> - 2D image 
+% to tetrahedral mesh
+% * <https://mjx888.github.io/im2mesh_demo_html/demo19.html demo19> - Function 
+% voxelMesh (voxel-based hexahedral mesh)
+% * <https://mjx888.github.io/im2mesh_demo_html/demo20.html demo20> - 3D voxel 
+% image to tetrahedral mesh (via fTetWild)
+##### SOURCE END #####
+-->
+</div></body></html>
