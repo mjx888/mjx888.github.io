@@ -4,9 +4,9 @@
     --primary-dark: #083d37;
     --secondary-color: #e56b3f;
     --accent-color: #dff5ee;
-    --warm-light: #fff3ec;
-    --bg-color: #fffdf9;
-    --bg-light: #edf8f4;
+    --warm-light: #fff8f4;
+    --bg-color: #fffefd;
+    --bg-light: #f6fbf9;
     --text-color: #17342f;
     --muted-color: #5a706a;
     --border-color: rgba(8, 61, 55, 0.13);
@@ -160,7 +160,7 @@ a:hover {
     background:
         radial-gradient(circle at 8% 12%, rgba(8, 127, 106, 0.16), transparent 27rem),
         radial-gradient(circle at 88% 16%, rgba(229, 107, 63, 0.15), transparent 25rem),
-        linear-gradient(145deg, #f3fbf7 0%, #fffdf9 48%, #fff5ed 100%);
+        linear-gradient(145deg, #f8fcfa 0%, #fffefd 48%, #fff9f5 100%);
 }
 
 #home::before,
@@ -193,7 +193,7 @@ a:hover {
 .bio {
     position: relative;
     padding: 50px;
-    background: rgba(255, 253, 249, 0.86);
+    background: rgba(255, 255, 255, 0.9);
     border: 1px solid var(--border-color);
     border-radius: 28px;
     box-shadow: var(--shadow-soft);
